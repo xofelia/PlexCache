@@ -1,11 +1,8 @@
 FROM frolvlad/alpine-python3
 
-RUN echo hello world
+WORKDIR /app
 
-RUN echo pwd
+RUN wget -qO - https://github.com/bexem/PlexCache/archive/refs/heads/main/v1.3.1.tar.gz | tar -xzvf - -C ./ --strip-component 1 && \
+pip install plexapi -r requirements.txt
 
-RUN python3 --version
-
-RUN pip install ./plexapi -r requirements.txt
-
-RUN pip install ./python3 plexcache_setup.py
+CMD python3 plexcache_setup.py
